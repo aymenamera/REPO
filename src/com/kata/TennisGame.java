@@ -32,29 +32,25 @@ public class TennisGame {
         System.out.println("*****  Pour voir un exemple tapez 2  *****");
         System.out.println("*****  sortir taper 0  *****");
        
-        int choice = scan.nextInt();
+        
+        int choice =-1;
+        
+        try {
+        	choice	 = Integer.parseInt(scan.next());
+        	 } catch (Throwable x) {
+        	 }
+        
         do{
-        if(choice != 1 && choice != 2 && choice != 0 ){
-        	   System.out.println( " Veuillez entré l'un des choix proposé : ");
-        	   choice = scan.nextInt();
-        	   } 
-
         switch (choice) {
             case 1:
           	
             	CalculScore board = new CalculScore(PLAYER_1, PLAYER_2);
             	
-                 while(!board.gameWin) {
-                 	 System.out.println();
-                 	 System.out.println("Pour marquer un point pour le joueur 1 veuillez taper 1, pour marquer un point pour le joueur 2 veuillez taper 2, 0 pour sortir");
-                 	 System.out.println();
-                 	 
-             int playerNum = scan.nextInt();
-                    
+                 while(!board.gameWin) {                 	
+             int playerNum = -1;
+                  
                      do{
-             	        if(playerNum != 1 && playerNum != 2 && playerNum != 0 ){
-             	        	  playerNum = scan.nextInt();
-             	        	   } 
+                    	
                      if(playerNum == 1 || playerNum == 2) {
                     	 String player = playerNum == 1 ? "D" : "F";
                     	 board.updateScore(player);
@@ -62,11 +58,24 @@ public class TennisGame {
                          board.displayScoreboard();
                          System.out.println();
                          System.out.println();
+                         try {
+                			 playerNum	 =  Integer.parseInt(scan.next());
+                	        	 } catch (Throwable x) {
+                	        	 }
                      } else if(playerNum == 0){
                     	 return;
+                     } else {
+                    	 playerNum = -1;
+                    	 System.out.println();
+                     	 System.out.println("Pour marquer un point pour le joueur 1 veuillez taper 1, pour marquer un point pour le joueur 2 veuillez taper 2, 0 pour sortir");
+                     	 System.out.println();
+                     	 try {
+                			 playerNum	 =  Integer.parseInt(scan.next());
+                	        	 } catch (Throwable x) {
+                	        	 }
                      }
                   
-                 }while(playerNum!= 1 && playerNum != 2 && playerNum!= 3 );
+                 }while(playerNum!=0);
                  }
            	
                 break;
@@ -76,9 +85,18 @@ public class TennisGame {
                 break;
             case 0:
                 break;
-         
+                default:
+                	System.out.println();
+                    System.out.println("*****  Pour jouer tapez 1  *****");
+                    System.out.println("*****  Pour voir un exemple tapez 2  *****");
+                    System.out.println("*****  sortir taper 0  *****");
+                    choice = -1;
+                	try {
+                   		choice	 = Integer.parseInt(scan.next());
+                        	 } catch (Throwable x) {                       	
+                        	 }                 	         
         }
-        }while(choice!= 1 && choice != 2 && choice!= 0);
+        }while(choice!= 0);
     }
 
 }
